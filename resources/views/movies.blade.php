@@ -6,7 +6,7 @@
 <div class="container">
 	<div class = "row">
 		<div class="col-10">
-			<h1 class="mt-3" style="text-align: center">Daftar Movies</h1>
+			<h1 class="mt-3" style="text-align: center">Movie List</h1>
 			<div align="right" class="m-3 px-2">
 				<a href="/create" class="btn btn-primary" style="text-align: right;">Add New Movie</a>
 			</div>
