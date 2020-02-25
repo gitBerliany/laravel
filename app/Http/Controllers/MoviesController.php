@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\movie;
+use App\Movie;
 use Carbon\Carbon;
 use File;
 use Image;
@@ -13,7 +13,7 @@ class MoviesController extends Controller
 {
     public function index()
     {
-        $movies = movie::all();
+        $movies = Movie::all();
         return view('movies', ['movies' => $movies]);
     }
 
@@ -41,7 +41,7 @@ class MoviesController extends Controller
         $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
         Image::make($file)->save($this->path . '/' . $fileName);
 
-        movie::create([
+        Movie::create([
             'mov_title' => $request->title,
             'mov_year' =>$request->year,
             'mov_rate' =>$request->rate,
@@ -55,17 +55,17 @@ class MoviesController extends Controller
         return redirect('/')->with('status','Add New Data Success!');
     }
 
-    public function show(movie $movie)
+    public function show(Movie $movie)
     {
         return view('movie', compact('movie'));
     }
 
-    public function edit(movie $movie)
+    public function edit(Movie $movie)
     {
          return view('edit', compact('movie'));
     }
 
-     public function imgupdate(Request $request, movie $movie)
+     public function imgupdate(Request $request, Movie $movie)
     {
          $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -88,7 +88,7 @@ class MoviesController extends Controller
 
     }
 
-    public function update(Request $request, movie $movie)
+    public function update(Request $request, Movie $movie)
     {
        
         $request->validate([
@@ -101,7 +101,7 @@ class MoviesController extends Controller
             'storyline' => 'required'
         ]);
 
-        movie::where('id', $movie->id)->update([
+        Movie::where('id', $movie->id)->update([
             'mov_title' => $request->title,
             'mov_year' =>$request->year,
             'mov_rate' =>$request->rate,
@@ -114,7 +114,7 @@ class MoviesController extends Controller
        return redirect('/')->with('status','Change Data Success!');
     }
 
-    public function destroy(movie $movie)
+    public function destroy(Movie $movie)
     {
         $image_path = public_path('images/'.$movie->mov_img);
         if(File::exists($image_path)) {
