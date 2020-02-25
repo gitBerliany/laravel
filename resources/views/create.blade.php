@@ -7,7 +7,7 @@
 	<div class = "row">
 		<div class="col-2"></div>
 		<div class="col-8" style="background-color: white;">
-			<h3 class="mt-3" align="center">Add Movies</h3>			
+			<h3 class="mt-3" align="center">Add New Movie</h3>			
 			<form method="post" action="/" enctype="multipart/form-data" class="add">
 			@csrf
 				<div class="form-group">
